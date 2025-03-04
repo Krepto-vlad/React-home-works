@@ -1,0 +1,32 @@
+.footer_info {
+    display: flex;
+    gap: 16px;
+
+    .footer_column {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        width: 190px;
+        padding: 0.2px 0.31px 19.8px 0.02px;
+
+        .column_name{
+            color: #08090A;
+            font-family: "Inter", sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: 1.5px;
+            text-align: left;
+        }
+
+        .template_text {
+            font-family: "Inter", sans-serif;
+            font-size: 15px;
+            line-height: 20px;
+            text-align: left;
+            color: #546285;
+            text-decoration: none;
+        }
+
+    }
+}
