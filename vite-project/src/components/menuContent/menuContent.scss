@@ -1,0 +1,58 @@
+.menu_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:  #F5FBFC;
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
+
+    .title {
+        width: 442px;
+        height: 55px;
+        font-family: "Inter", sans-serif;
+        font-size: 50px;
+        line-height: 55px;
+        letter-spacing: 1.6px;
+        text-align: center;
+        color: #35B8BE;
+        margin-top: 150px;
+    }
+
+    .menu_description {
+        width: 466px;
+        height: 54px;
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        line-height: 27px;
+        letter-spacing: 0.36px;
+        text-align: center;
+        color: #546285;
+        margin-top: 26px;
+    }
+
+    .button_wrapper {
+        display: flex;
+        gap: 30px; 
+        margin: 50px 0 40px 0;
+    }
+
+    button {
+        margin-top: 45px;
+        padding: 16px 36px;
+        font-family: "Inter", sans-serif;
+        font-size: 17px;
+        line-height: 20px;
+        text-align: center;
+        color: white;
+        background-color: #35B8BE;
+        cursor: pointer;
+        border-radius: 6px;
+        border: none;
+        transition: all  0.3s ease-in-out; 
+        margin-bottom: 15px;
+    }
+
+    button:hover {
+        box-shadow: 3px 3px 10px 1px rgba(101, 119, 117, 0.3);   
+        transform: translateY(-3px)
+      }
+}
