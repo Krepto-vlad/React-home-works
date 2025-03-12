@@ -25,7 +25,6 @@ export default class MenuContent extends Component {
           <ActionButton buttonText="Breakfast" />
         </div>
         <ProductCard />
-        <button>See more</button>
       </div>
     );
   }
