@@ -1,0 +1,89 @@
+.product_card_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+
+    .product_card {
+        display: flex;
+        padding: 26px;
+        background-color: white;
+        border-radius: 6px;
+        border: 1px solid #35B8BE26;
+        img{
+            width: 120px;
+            height: 120px;
+        }
+
+        .product_info {
+            display: flex;
+            flex-direction: column;
+            margin-left: 30px;
+
+            .product_name_price {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 18px;
+                
+                .productName {
+                    font-family: "Inter", sans-serif;
+                    font-size: 18px;
+                    line-height: 20px;
+                    letter-spacing: 0.6px;
+                    text-align: left;
+                    color: #08090A;
+                }
+
+                .productPrice {
+                    font-family: "Inter", sans-serif;
+                    font-size: 15px;
+                    line-height: 20px;
+                    text-align: left;
+                    color: #35B8BE;
+                }
+            }
+
+            .product_description {
+                width: 350px;
+                height: 48px;
+                font-family: "Inter", sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: 0.32px;
+                text-align: left;
+                color: #546285;
+                margin-bottom: 8px;
+            }
+
+            div {
+                display: flex;
+
+                .count_of_products {
+                    width: 60px;
+                    height: 45px;
+                    border-radius: 6px;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid #DDDDDD;
+                    font-family: "Inter", sans-serif;
+                }
+
+                button {
+                    padding: 9px 27px;
+                    background-color: #35B8BE;
+                    border-radius: 6px;
+                    border: none;
+                    font-family: "Inter", sans-serif;
+                    font-size: 16px;
+                    line-height: 27px;
+                    letter-spacing: 0.36px;
+                    text-align: center;
+                    margin-left: 8px;
+                    margin-top: 0px;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+    }
+}
