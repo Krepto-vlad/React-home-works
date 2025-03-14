@@ -51,14 +51,14 @@ export default class ProductCard extends Component {
     if (!text) return "";
     return text.length > maxLength ? text.slice(0, maxLength) + " ..." : text;
   };
-
+////////////////
   handleIncrement = (productId) => {
     this.setState((prevState) => {
       const updatedCounts = {
         ...prevState.cartCounts,
         [productId]: (prevState.cartCounts[productId] || 0) + 1,
       };
-      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0)); // Обновляем общий счетчик в Header
+      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0));
       return { cartCounts: updatedCounts };
     });
   };
@@ -70,11 +70,10 @@ export default class ProductCard extends Component {
         ...prevState.cartCounts,
         [productId]: Math.max((prevState.cartCounts[productId] || 0) - 1, 0),
       };
-      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0)); // Обновляем общий счетчик в Header
-      return { cartCounts: updatedCounts };
+      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0)); 
     });
   };
-
+/////////////////
 
   render() {
     const { products, visibleCards, cartCounts} = this.state;

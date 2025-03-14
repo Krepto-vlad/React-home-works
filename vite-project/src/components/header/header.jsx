@@ -27,7 +27,8 @@ export default class Header extends Component {
             <a className="cart" href="">
               <img src={ImageCart} alt="cart" />
             </a>
-            <div className="cart_items">0</div>
+            <div className="cart_items">{this.props.totalItems}</div>
+            {/* dljkdl */}
           </div>
         </div>
       </header>
