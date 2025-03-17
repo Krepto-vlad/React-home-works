@@ -1,3 +1,3 @@
-import ActionButton from "./actionButton";
+import Button from "./Button";
 
-export {ActionButton}
+export {Button}

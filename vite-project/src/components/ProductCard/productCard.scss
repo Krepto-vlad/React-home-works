@@ -9,9 +9,16 @@
         background-color: white;
         border-radius: 6px;
         border: 1px solid #35B8BE26;
-        img{
+
+        .image_wrapper {
             width: 120px;
             height: 120px;
+            
+            img{
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
         }
 
         .product_info {
@@ -24,7 +31,7 @@
                 justify-content: space-between;
                 margin-bottom: 18px;
                 
-                .productName {
+                .product_name {
                     font-family: "Inter", sans-serif;
                     font-size: 18px;
                     line-height: 20px;
@@ -33,7 +40,7 @@
                     color: #08090A;
                 }
 
-                .productPrice {
+                .product_price {
                     font-family: "Inter", sans-serif;
                     font-size: 15px;
                     line-height: 20px;
@@ -54,33 +61,19 @@
                 margin-bottom: 8px;
             }
 
-            div {
+            .add_to_cart_wrapper {
                 display: flex;
 
                 .count_of_products {
+                    display: flex;
                     width: 60px;
-                    height: 45px;
+                    height: 50px;
                     border-radius: 6px;
                     align-items: center;
                     justify-content: center;
                     border: 1px solid #DDDDDD;
                     font-family: "Inter", sans-serif;
-                }
-
-                button {
-                    padding: 9px 27px;
-                    background-color: #35B8BE;
-                    border-radius: 6px;
-                    border: none;
-                    font-family: "Inter", sans-serif;
-                    font-size: 16px;
-                    line-height: 27px;
-                    letter-spacing: 0.36px;
-                    text-align: center;
-                    margin-left: 8px;
-                    margin-top: 0px;
-                    color: white;
-                    cursor: pointer;
+                    margin-right: 8px;
                 }
             }
         }

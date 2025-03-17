@@ -54,7 +54,7 @@
         margin-top: 100px;
         border-top: 1px solid #7E828F17;
 
-        p{
+        .build_info{
             font-family: "Inter", sans-serif;
             font-size: 15px;
             line-height: 20px;
@@ -63,7 +63,7 @@
             margin-top: 10px;
         }
 
-        div {
+        .social_networks {
             display: flex;
             gap: 24px;
 

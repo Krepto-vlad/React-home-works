@@ -2,15 +2,15 @@ import React from "react";
 import { Component } from "react";
 import "./header.scss";
 
-import ImageCart from "../../assets/cart.png";
-import ImageLogo from "../../assets/Logo.png";
+import imageCart from "../../assets/cart.png";
+import imageLogo from "../../assets/logo.png";
 
 export default class Header extends Component {
   render() {
     return (
       <header>
         <a className="logo" href="/">
-          <img src={ImageLogo} alt="logo" />
+          <img src={imageLogo} alt="logo" />
         </a>
 
         <div className="navigation_wrapper">
@@ -25,7 +25,7 @@ export default class Header extends Component {
 
           <div className="cartButton">
             <a className="cart" href="">
-              <img src={ImageCart} alt="cart" />
+              <img src={imageCart} alt="cart" />
             </a>
             <div className="cart_items">0</div>
           </div>

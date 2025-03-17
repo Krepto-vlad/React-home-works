@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./ProductCard.scss";
+import { Button } from "../actionButton/index";
 import { products } from "../../mocks/products";
 
 export default class ProductCard extends Component {
@@ -23,30 +24,31 @@ export default class ProductCard extends Component {
     const { cartCounts } = this.state;
 
     return (
-      <div className="product_card_wrapper">
+      <ul className="product_card_wrapper">
         {products.map((product) => (
-          <div key={product.id} className="product_card">
-            <img src={product.image} alt={product.name} />
+          <li key={product.id} className="product_card">
+
+            <div className="image_wrapper">
+              <img src={product.image} alt={product.name} />
+            </div>
 
             <div className="product_info">
               <div className="product_name_price">
-                <p className="productName">{product.name}</p>
-                <p className="productPrice">${product.price} USD</p>
+                <p className="product_name">{product.name}</p>
+                <p className="product_price">${product.price} USD</p>
               </div>
               <p className="product_description">{product.description}</p>
 
-              <div>
+              <div className="add_to_cart_wrapper">
                 <div className="count_of_products">
                   {cartCounts[product.id] || 0}
                 </div>
-                <button onClick={() => this.handleAddToCart(product.id)}>
-                  Add to cart
-                </button>
+                <Button buttonText="Add to cart" onClick={() => this.handleAddToCart(product.id)} isActive={false} />
               </div>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     );
   }
 }
