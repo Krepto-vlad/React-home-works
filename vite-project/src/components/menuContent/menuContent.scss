@@ -45,24 +45,4 @@
         margin: 50px 0 40px 0;
     }
 
-    button {
-        margin-top: 45px;
-        padding: 16px 36px;
-        font-family: "Inter", sans-serif;
-        font-size: 17px;
-        line-height: 20px;
-        text-align: center;
-        color: white;
-        background-color: #35B8BE;
-        cursor: pointer;
-        border-radius: 6px;
-        border: none;
-        transition: all  0.3s ease-in-out; 
-        margin-bottom: 15px;
-    }
-
-    button:hover {
-        box-shadow: 3px 3px 10px 1px rgba(101, 119, 117, 0.3);   
-        transform: translateY(-3px)
-      }
 }

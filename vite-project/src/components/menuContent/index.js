@@ -1,3 +1,3 @@
-import MenuContent from "./menuContent";
+import MenuContent from "./MenuContent";
 
 export {MenuContent}

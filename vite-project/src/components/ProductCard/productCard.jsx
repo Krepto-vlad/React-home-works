@@ -1,6 +1,6 @@
 import { Component } from "react";
 import "./ProductCard.scss";
-
+import { Button } from "../actionButton/index";
 
 const API_URL = "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals";
 export default class ProductCard extends Component {
@@ -26,20 +26,17 @@ export default class ProductCard extends Component {
         throw new Error("Error loading data");
       }
       const data = await response.json();
-      this.setState({ products: data, loading: false });
+
+      const productsWithCount = data.map((product) => ({
+        ...product,
+        count: product.count ?? 0,
+      }));
+
+      this.setState({ products: productsWithCount, loading: false });
     } catch (error) {
       this.setState({ error: error.message, loading: false });
     }
   };
-
-  // handleAddToCart = (productId) => {
-  //   this.setState((prevState) => ({
-  //     cartCounts: {
-  //       ...prevState.cartCounts,
-  //       [productId]: (prevState.cartCounts[productId] || 0) + 1,
-  //     },
-  //   }));
-  // };
 
   handleLoadMore = () => {
     this.setState((prevState) => ({
@@ -51,74 +48,97 @@ export default class ProductCard extends Component {
     if (!text) return "";
     return text.length > maxLength ? text.slice(0, maxLength) + " ..." : text;
   };
-////////////////
-  handleIncrement = (productId) => {
-    this.setState((prevState) => {
-      const updatedCounts = {
-        ...prevState.cartCounts,
-        [productId]: (prevState.cartCounts[productId] || 0) + 1,
-      };
-      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0));
-      return { cartCounts: updatedCounts };
-    });
+
+  handleIncrementProduct = (productId) => {
+    this.setState((prevState) => ({
+      products: prevState.products.map((product) =>
+        product.id === productId
+          ? { ...product, count: product.count + 1 }
+          : product
+      ),
+    }));
   };
 
-  handleDecrement = (productId) => {
+  handleDecrementProduct = (productId) => {
+    this.setState((prevState) => ({
+      products: prevState.products.map((product) =>
+        product.id === productId
+          ? { ...product, count: Math.max(product.count - 1, 0) }
+          : product
+      ),
+    }));
+  };
+
+  handleAddToCart = (productId) => {
     this.setState((prevState) => {
-      if (!prevState.cartCounts[productId]) return null; 
-      const updatedCounts = {
-        ...prevState.cartCounts,
-        [productId]: Math.max((prevState.cartCounts[productId] || 0) - 1, 0),
+      const product = prevState.products.find((p) => p.id === productId);
+      if (!product || product.count === 0) return null;
+
+      this.props.updateCartCount(product.count);
+      return {
+        products: prevState.products.map((p) =>
+          p.id === productId ? { ...p, count: 0 } : p
+        ),
       };
-      this.props.updateCartCount(Object.values(updatedCounts).reduce((sum, count) => sum + count, 0)); 
     });
   };
-/////////////////
 
   render() {
-    const { products, visibleCards, cartCounts} = this.state;
+    const { products, visibleCards } = this.state;
 
     const visibleProducts = products.slice(0, visibleCards);
 
     return (
       <>
-        <div className="product_card_wrapper">
+        <ul className="product_card_wrapper">
           {visibleProducts.map((product) => (
-            <div key={product.id} className="product_card">
+            <li key={product.id} className="product_card">
               <img src={product.img} alt={product.meal} />
 
               <div className="product_info">
                 <div className="product_name_price">
-                  <p className="productName">{product.meal}</p>
-                  <p className="productPrice">${product.price} USD</p>
+                  <p className="product_name">{product.meal}</p>
+                  <p className="product_price">${product.price} USD</p>
                 </div>
                 <p className="product_description">
                   {this.truncateText(product.instructions)}
                 </p>
 
-                <div>
-                  {/* <div className="count_of_products">
-                    {cartCounts[product.id] || 0}
-                  </div> */}
+                <div className="add_to_cart">
+                  <div className="product_count_wrapper">
+                    <button
+                      className="plus_minus_btn"
+                      onClick={() => this.handleDecrementProduct(product.id)}
+                    >
+                      −
+                    </button>
+                    <div className="product_qty">{product.count ?? 0}</div>
+                    <button
+                      className="plus_minus_btn"
+                      onClick={() => this.handleIncrementProduct(product.id)}
+                    >
+                      +
+                    </button>
+                  </div>
 
-                  <button className="decrement" onClick={() => this.handleDecrement(product.id)}>-</button>
-                  <div className="count">{cartCounts[product.id] || 0}</div>
-                  <button className="increment" onClick={() => this.handleIncrement(product.id)}>+</button>
-
-                  <button onClick={() => this.handleAddToCart(product.id)}>
-                    Add to cart
-                  </button>
+                  <Button
+                    buttonText="Add to cart"
+                    onClick={() => this.handleAddToCart(product.id)}
+                    isActive={false}
+                  />
                 </div>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {visibleCards < products.length && (
-            <button className="see_more" onClick={this.handleLoadMore}>
-              See More
-            </button>
-          )}
+          <Button
+            buttonText="See More"
+            onClick={this.handleLoadMore}
+            isActive={false}
+          />
+        )}
       </>
     );
   }

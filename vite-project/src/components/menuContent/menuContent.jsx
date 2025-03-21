@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "./menuContent.scss";
-import ActionButton from "../actionButton/actionButton";
-import ProductCard from "../ProductCard/productCard";
+import { Button } from "../actionButton/index";
+import { ProductCard } from "../ProductCard/index";
 
 export default class MenuContent extends Component {
   render() {
@@ -20,11 +20,11 @@ export default class MenuContent extends Component {
           our store to place a pickup order. Fast and fresh food.
         </p>
         <div className="button_wrapper">
-          <ActionButton buttonText="Desert" />
-          <ActionButton buttonText="Dinner" />
-          <ActionButton buttonText="Breakfast" />
+          <Button buttonText="Desert" />
+          <Button buttonText="Dinner" />
+          <Button buttonText="Breakfast" />
         </div>
-        <ProductCard />
+        <ProductCard updateCartCount={this.props.updateCartCount} />
       </div>
     );
   }
