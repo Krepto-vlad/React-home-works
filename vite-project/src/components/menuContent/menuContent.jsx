@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "./menuContent.scss";
 import { Button } from "../actionButton/index";
-import { ProductCard } from "../ProductCard/index";
+import { ProductCards } from "../ProductCards/index";
 
 export default class MenuContent extends Component {
   render() {
@@ -25,7 +25,7 @@ export default class MenuContent extends Component {
             <Button buttonText="Dinner" />
             <Button buttonText="Breakfast" />
           </div>
-          <ProductCard />
+          <ProductCards />
         </div>
         <Button buttonText="See more" />
       </div>
