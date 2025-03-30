@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { MenuContent } from "../../components/menuContent";
+import { MenuContent } from "../../components/menuContent/index";
 import { Layout } from "../../components/layout/index";
 export default class MenuPage extends Component {
   constructor() {
@@ -18,11 +18,9 @@ export default class MenuPage extends Component {
 
   render() {
     return (
-      <>
         <Layout totalItems={this.state.totalItems}>
           <MenuContent updateCartCount={this.updateCartCount} />
         </Layout>
-      </>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import "./footerLinks.scss";
 
 const footerInfo = [
@@ -16,28 +16,28 @@ const footerInfo = [
   },
 ];
 
-export default class FooterLinks extends Component {
+export default class FooterLinks extends PureComponent {
   render() {
     return (
-      <div className="footerInfo">
+      <div className="footer_info">
         {footerInfo.map((column) => {
           const isTemplate = column.columnName === "TEMPLATE";
 
           return (
-            <div key={column.columnName} className="footerColumn">
-              <p className="columnName">{column.columnName}</p>
+            <div key={column.columnName} className="footer_column">
+              <p className="column_name">{column.columnName}</p>
 
               {column.components.map((item, index) =>
                 isTemplate ? (
                   <a
                     key={index}
                     href="https://www.google.com"
-                    className="templateText"
+                    className="template_text"
                   >
                     {item}
                   </a>
                 ) : (
-                  <p key={index} className="templateText">
+                  <p key={index} className="template_text">
                     {item}
                   </p>
                 )

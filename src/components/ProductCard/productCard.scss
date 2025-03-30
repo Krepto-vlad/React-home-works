@@ -1,0 +1,97 @@
+.product_card {
+    display: flex;
+    padding: 26px;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid #35B8BE26;
+    .image_wrapper {
+        width: 120px;
+        height: 120px;
+
+        img{
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .product_info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+
+        .product_name_price {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            
+            .product_name {
+                font-family: "Inter", sans-serif;
+                font-size: 18px;
+                line-height: 20px;
+                letter-spacing: 0.6px;
+                text-align: left;
+                color: #08090A;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                max-width: 100%;
+            }
+
+            .product_price {
+                font-family: "Inter", sans-serif;
+                font-size: 15px;
+                line-height: 20px;
+                text-align: left;
+                color: #35B8BE;
+            }
+        }
+
+        .product_description {
+            width: 350px;
+            height: 48px;
+            font-family: "Inter", sans-serif;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0.32px;
+            text-align: left;
+            color: #546285;
+            margin-bottom: 8px;
+        }
+
+        .add_to_cart {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .product_count_wrapper {
+                border: 1px solid rgb(175, 173, 173);
+                display: flex;
+                border-radius: 6px;
+                padding: 11px 12px;
+                background-color: #FAFAFA;
+                gap: 14px;
+
+                .plus_minus_btn {
+                    width: 30px;
+                    height: 30px;
+                    font-size: 30px;
+                    border: none;
+                    background-color: #FAFAFA;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .product_qty {
+                    display: flex;
+                    align-items: center;
+                    font-family: "Inter", sans-serif;
+                    font-weight: 600;
+                    color: #35B8BE;
+                }
+            }
+        }
+    }
+
+}

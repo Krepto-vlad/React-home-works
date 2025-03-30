@@ -1,9 +1,9 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 import "./menuContent.scss";
-import { Button } from "../actionButton/index";
-import { ProductCard } from "../ProductCard/index";
+import { Button } from "../Button/index";
+import { ProductCards } from "../ProductCards/index";
 
-export default class MenuContent extends Component {
+export default class MenuContent extends PureComponent {
   render() {
     return (
       <div className="menu_wrapper">
@@ -24,7 +24,7 @@ export default class MenuContent extends Component {
           <Button buttonText="Dinner" />
           <Button buttonText="Breakfast" />
         </div>
-        <ProductCard updateCartCount={this.props.updateCartCount} />
+        <ProductCards updateCartCount={this.props.updateCartCount} />
       </div>
     );
   }

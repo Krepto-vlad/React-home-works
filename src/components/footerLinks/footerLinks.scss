@@ -1,15 +1,15 @@
-.footerInfo {
+.footer_info {
     display: flex;
     gap: 16px;
 
-    .footerColumn {
+    .footer_column {
         display: flex;
         flex-direction: column;
         gap: 28px;
         width: 190px;
         padding: 0.2px 0.31px 19.8px 0.02px;
 
-        .columnName{
+        .column_name{
             color: #08090A;
             font-family: "Inter", sans-serif;
             font-size: 13px;
@@ -19,7 +19,7 @@
             text-align: left;
         }
 
-        .templateText {
+        .template_text {
             font-family: "Inter", sans-serif;
             font-size: 15px;
             line-height: 20px;

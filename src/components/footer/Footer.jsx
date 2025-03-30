@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { PureComponent } from "react";
 
 import "./footer.scss";
 import { FooterLinks } from "../footerLinks";
@@ -9,7 +9,7 @@ import YT from "../../assets/YT.png";
 import twitter from "../../assets/twit.png";
 import backImg from "../../assets/24.png";
 
-export default class Footer extends Component {
+export default class Footer extends PureComponent {
   render() {
     return (
       <div className="footer">
@@ -20,7 +20,7 @@ export default class Footer extends Component {
             <a className="logo" href="/">
               <img src={imageLogo} alt="logo" />
             </a>
-            <p>Takeaway & Delivery template for small - medium businesses.</p>
+            <p className="footer_nav_subtext">Takeaway & Delivery template for small - medium businesses.</p>
           </div>
 
           <div className="footer_columns">
