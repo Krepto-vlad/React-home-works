@@ -45,4 +45,35 @@
         margin: 50px 0 40px 0;
     }
 
+    .phone-tooltip {
+        color: #35B8BE;
+        cursor: pointer;
+        position: relative;
+        font-weight: bold;
+      }
+      
+      .phone-tooltip::after {
+        content: "📞 123-456-7890"; 
+        position: absolute;
+        left: 50%;
+        bottom: 120%;
+        transform: translateX(-50%);
+        background: #35B8BE;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        white-space: nowrap;
+        font-size: 14px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      
+      .phone-tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(-5px);
+      }
+
 }

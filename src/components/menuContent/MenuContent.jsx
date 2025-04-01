@@ -10,10 +10,7 @@ export default class MenuContent extends PureComponent {
         <p className="title">Browse our menu</p>
         <p className="menu_description">
           Use our menu to place an order online, or
-          <span
-            style={{ color: "#35B8BE", cursor: "pointer" }}
-            title="123-456-7890"
-          >
+          <span className="phone-tooltip">
             {" "}
             phone{" "}
           </span>
