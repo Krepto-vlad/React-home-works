@@ -1,12 +1,9 @@
-import React from "react";
-import { Component } from "react";
 import "./header.scss";
 
 import imageCart from "../../assets/cart.png";
 import imageLogo from "../../assets/logo.png";
 
-export default class Header extends Component {
-  render() {
+export default function Header({totalItems}) {
     return (
       <header>
         <a className="logo" href="/">
@@ -27,10 +24,9 @@ export default class Header extends Component {
             <a className="cart" href="">
               <img src={imageCart} alt="cart" />
             </a>
-            <div className="cart_items">{this.props.totalItems}</div>
+            <div className="cart_items">{totalItems}</div>
           </div>
         </div>
       </header>
     );
-  }
 }
