@@ -1,15 +1,17 @@
-import { Component } from "react";
-import "./button.scss"
+import "./button.scss";
 
-export default class Button extends Component {
-
-  render() {
-    const { buttonText, onClick } = this.props;
-
-    return (
-      <button className="button" onClick={onClick}>
-        {buttonText}
-      </button>
-    );
-  }
+export default function Button({
+  buttonText,
+  onClick,
+  isActive,
+  variant = "primary",
+}) {
+  return (
+    <button
+      className={`button ${variant} ${isActive ? "active" : ""}`}
+      onClick={onClick}
+    >
+      {buttonText}
+    </button>
+  );
 }

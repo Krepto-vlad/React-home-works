@@ -1,5 +1,3 @@
-import { PureComponent } from "react";
-
 import "./footer.scss";
 import { FooterLinks } from "../footerLinks";
 
@@ -9,8 +7,7 @@ import YT from "../../assets/YT.png";
 import twitter from "../../assets/twit.png";
 import backImg from "../../assets/24.png";
 
-export default class Footer extends PureComponent {
-  render() {
+export default function Footer() {
     return (
       <div className="footer">
         <img className="back_img" src={backImg} alt="backImg" />
@@ -42,5 +39,4 @@ export default class Footer extends PureComponent {
         </div>
       </div>
     );
-  }
 }

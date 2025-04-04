@@ -1,26 +1,17 @@
-import { Component } from "react";
-
 import { MenuContent } from "../../components/menuContent/index";
 import { Layout } from "../../components/layout/index";
-export default class MenuPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      totalItems: 0,
-    };
-  }
+import { useState } from "react";
 
-  updateCartCount = (count) => {
-    this.setState((prevState) => ({
-      totalItems: prevState.totalItems + count,
-    }));
+export default function MenuPage() {
+  const [totalItems, setTotalItems] = useState(0);
+
+  const updateCartCount = (count) => {
+    setTotalItems((prevTotal) => prevTotal + count);
   };
 
-  render() {
-    return (
-        <Layout totalItems={this.state.totalItems}>
-          <MenuContent updateCartCount={this.updateCartCount} />
-        </Layout>
-    );
-  }
+  return (
+    <Layout totalItems={totalItems}>
+      <MenuContent updateCartCount={updateCartCount} />
+    </Layout>
+  );
 }
