@@ -23,8 +23,12 @@ export default class ProductCard extends PureComponent {
   };
 
   handleAddToCart = () => {
-    if (this.state.count === 0) return;
-    this.props.updateCartCount(this.state.count);
+    const { count } = this.state;
+    const { product, updateCartCount } = this.props;
+
+    if (count === 0) return;
+
+    updateCartCount({ id: product.id, count });
     this.setState({ count: 0 });
   };
 
