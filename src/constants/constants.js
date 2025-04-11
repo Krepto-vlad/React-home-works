@@ -13,5 +13,4 @@ export const footerInfo = [
   },
 ];
 
-export const API_URL =
-  "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals";
+export const API_URL = "https://65de35f3dccfcd562f5691bb.mockapi.io/api/v1/meals";
