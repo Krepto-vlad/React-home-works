@@ -15,7 +15,7 @@ export default function ProductCard({ product, updateCartCount }) {
 
   const handleAddToCart = () => {
     if (count === 0) return;
-    updateCartCount(count);
+    updateCartCount({ id: product.id, count });
     setCount(0);
   };
 

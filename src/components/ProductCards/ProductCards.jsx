@@ -2,39 +2,23 @@ import { useState, useEffect } from "react";
 import "./ProductCards.scss";
 import { Button } from "../Button/index";
 import { ProductCard } from "../ProductCard/index";
-import { API_URL } from "../../constants/constants";
+import { VISIBLE_CARDS } from "../../constants/constants";
 
-export default function ProductCards({ activeCategory, updateCartCount }) {
-  const [products, setProducts] = useState([]);
-  const [visibleCards, setVisibleCards] = useState(6);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function ProductCards({
+  products,
+  activeCategory,
+  updateCartCount,
+  loading,
+  error,
+}) {
+  const [visibleCards, setVisibleCards] = useState(VISIBLE_CARDS);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  useEffect(() => {
-    setVisibleCards(6);
+    setVisibleCards(VISIBLE_CARDS);
   }, [activeCategory]);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error("Error loading data");
-      }
-      const data = await response.json();
-      setProducts(data);
-      setLoading(false);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
-
   const handleLoadMore = () => {
-    setVisibleCards((prevVisible) => prevVisible + 6);
+    setVisibleCards((prevVisible) => prevVisible + VISIBLE_CARDS);
   };
 
   const filteredProducts = products.filter(
