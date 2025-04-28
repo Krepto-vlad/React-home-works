@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { API_URL } from "../../constants/constants";
 
 export default function MenuPage() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState({});
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,22 +36,17 @@ export default function MenuPage() {
 
   const updateCartCount = ({ id, count }) => {
     setCartItems((prevCart) => {
-      const itemIndex = prevCart.findIndex((item) => item.id === id);
-
-      if (itemIndex !== -1) {
-        const updatedCart = [...prevCart];
-        updatedCart[itemIndex].count += count;
-        return updatedCart;
-      } else {
-        return [...prevCart, { id, count }];
-      }
+      const prevCount = prevCart[id] || 0;
+      return {
+        ...prevCart,
+        [id]: prevCount + count,
+      };
     });
   };
 
-  const totalItems = cartItems.reduce((total, item) => total + item.count, 0);
 
   return (
-    <Layout totalItems={totalItems}>
+    <Layout cart={cartItems}>
       <MenuContent
         updateCartCount={updateCartCount}
         categories={categories}

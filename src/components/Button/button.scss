@@ -31,5 +31,6 @@
 }
 
 .button.filter:hover {
-  background-color: #a3a3a3;
+  box-shadow: 3px 3px 10px 1px rgba(101, 119, 117, 0.3);
+  transform: translateY(-3px);
 }
