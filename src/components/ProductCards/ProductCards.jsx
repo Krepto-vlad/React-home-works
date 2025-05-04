@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import "./ProductCards.scss";
 import { Button } from "../Button/index";
 import { ProductCard } from "../ProductCard/index";
-import { VISIBLE_CARDS } from "../../constants/constants";
+import { CARDS_PAGE_COUNT } from "../../constants/constants";
 
 export default function ProductCards({
   products,
@@ -11,19 +11,20 @@ export default function ProductCards({
   loading,
   error,
 }) {
-  const [visibleCards, setVisibleCards] = useState(VISIBLE_CARDS);
+  const [visibleCards, setVisibleCards] = useState(CARDS_PAGE_COUNT);
 
   useEffect(() => {
-    setVisibleCards(VISIBLE_CARDS);
+    setVisibleCards(CARDS_PAGE_COUNT);
   }, [activeCategory]);
 
   const handleLoadMore = () => {
-    setVisibleCards((prevVisible) => prevVisible + VISIBLE_CARDS);
+    setVisibleCards((prevVisible) => prevVisible + CARDS_PAGE_COUNT);
   };
 
-  const filteredProducts = products.filter(
-    (product) => product.category === activeCategory
-  );
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => product.category === activeCategory);
+  }, [products, activeCategory]);
+
   const visibleProducts = filteredProducts.slice(0, visibleCards);
   const loadMore = visibleCards < filteredProducts.length;
 
@@ -31,7 +32,7 @@ export default function ProductCards({
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
+    <div className="product_cards">
       <ul className="product_card_wrapper">
         {visibleProducts.map((product) => (
           <ProductCard
@@ -49,6 +50,6 @@ export default function ProductCards({
           variant="primary"
         />
       )}
-    </>
+    </div>
   );
 }
