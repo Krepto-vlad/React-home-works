@@ -2,37 +2,21 @@ import { MenuContent } from "../../components/menuContent/index";
 import { Layout } from "../../components/layout/index";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../constants/constants";
+import { useFetch } from "../../Utils/customHooks";
 
 export default function MenuPage() {
+  const { data: products, loading, error } = useFetch(API_URL);
   const [cartItems, setCartItems] = useState({});
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (!products || products.length === 0) return;
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error("Error loading data");
-      }
-      const data = await response.json();
-      setProducts(data);
-
-      const uniqueCategories = [...new Set(data.map((item) => item.category))];
-      setCategories(uniqueCategories);
-      setActiveCategory(uniqueCategories[0]);
-      setLoading(false);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
-    }
-  };
+    const uniqueCategories = [...new Set(products.map((item) => item.category))];
+    setCategories(uniqueCategories);
+    setActiveCategory(uniqueCategories[0]);
+  }, [products]);
 
   const updateCartCount = ({ id, count }) => {
     setCartItems((prevCart) => {
@@ -44,7 +28,6 @@ export default function MenuPage() {
     });
   };
 
-
   return (
     <Layout cart={cartItems}>
       <MenuContent
@@ -52,7 +35,7 @@ export default function MenuPage() {
         categories={categories}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
-        products={products}
+        products={products || []}
         loading={loading}
         error={error}
       />
