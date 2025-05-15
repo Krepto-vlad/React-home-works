@@ -1,14 +1,11 @@
-import "./loginPage.scss";
 import LoginForm from "../../components/loginForm/LoginForm";
+import { Layout } from "../../components/layout";
 
 const LoginPage = () => {
   return (
-    <div className="login-page">
-      <div className="overlay"></div>
-      <div className="login-form">
-        <LoginForm />
-      </div>
-    </div>
+    <Layout>
+      <LoginForm />
+    </Layout>
   );
 };
 
