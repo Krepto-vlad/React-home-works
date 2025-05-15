@@ -18,14 +18,12 @@ export default function ProductCards({
   }, [activeCategory]);
 
   const handleLoadMore = () => {
-    setVisibleCards((prevVisible) => prevVisible + CARDS_PAGE_COUNT );
+    setVisibleCards((prevVisible) => prevVisible + CARDS_PAGE_COUNT);
   };
 
   const filteredProducts = useMemo(() => {
-    return   products.filter((product) => product.category === activeCategory);
+    return products.filter((product) => product.category === activeCategory);
   }, [products, activeCategory]);
-
-
 
   const visibleProducts = filteredProducts.slice(0, visibleCards);
   const loadMore = visibleCards < filteredProducts.length;
