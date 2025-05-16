@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./loginForm.scss";
 import { loginUser, registerUser } from "../../api/authService";
+import "./loginForm.scss";
 
 const initialForm = {
   name: "",
@@ -19,39 +19,30 @@ const LoginForm = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleCreateAccount = async () => {
+  const handleAuth = async (isLogin) => {
     try {
-      const response = await registerUser(formData);
+      const response = isLogin
+        ? await loginUser(formData)
+        : await registerUser(formData);
       if (response.token) {
         localStorage.setItem("token", response.token);
         localStorage.setItem("userId", String(response.user.id));
       }
     } catch (error) {
+      console.log(error.message);
       setAuthError(error.message);
     }
   };
 
-  const handleLogin = async () => {
-    try {
-      const response = await loginUser(formData);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("userId", String(response.user.id));
-      }
-    } catch (error) {
-      setAuthError(error.message);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleAuth(isLogin);
   };
 
   return (
     <div className="loginWrapper">
       <div className="login-form">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            isLogin ? handleLogin() : handleCreateAccount();
-          }}
-        >
+        <form onSubmit={handleSubmit}>
           {!isLogin ? (
             <>
               <p className="title">Create your account</p>
@@ -119,7 +110,7 @@ const LoginForm = () => {
               <>
                 <p className="create-acc">Already have an account?</p>
                 <button type="button" onClick={() => setIsLogin(true)}>
-                   Log in
+                  Log in
                 </button>
               </>
             )}
