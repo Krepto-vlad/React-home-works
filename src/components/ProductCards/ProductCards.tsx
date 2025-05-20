@@ -3,6 +3,15 @@ import "./ProductCards.scss";
 import { Button } from "../Button/index";
 import { ProductCard } from "../ProductCard/index";
 import { CARDS_PAGE_COUNT } from "../../constants/constants";
+import { type Product } from "../../../types/productTypes";
+
+interface ProductCardsProps {
+  products: Product[];
+  activeCategory: string | null;
+  updateCartCount: (args: { id: number; count: number }) => void;
+  loading: boolean;
+  error: string | null;
+}
 
 export default function ProductCards({
   products,
@@ -10,7 +19,7 @@ export default function ProductCards({
   updateCartCount,
   loading,
   error,
-}) {
+}: ProductCardsProps) {
   const [visibleCards, setVisibleCards] = useState(CARDS_PAGE_COUNT);
 
   useEffect(() => {

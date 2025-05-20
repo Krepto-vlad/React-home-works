@@ -5,4 +5,3 @@ import { LoginPage } from "./pages/loginPage";
 export default function MyApp() {
     return <LoginPage />;
 }
-
