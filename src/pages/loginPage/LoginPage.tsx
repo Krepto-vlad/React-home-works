@@ -1,7 +1,7 @@
 import LoginForm from "../../components/loginForm/LoginForm";
 import { Layout } from "../../components/layout";
 
-const LoginPage = () => {
+export default function LoginPage () {
   return (
     <Layout>
       <LoginForm />
@@ -9,4 +9,3 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;

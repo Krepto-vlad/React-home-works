@@ -1,6 +1,7 @@
 import { BASE_URL } from "../constants/constants";
+import { RegisterData, LoginData, AuthResponse } from "../../types/authTypes";
 
-export const registerUser = async (userData) => {
+export const registerUser = async (userData: RegisterData): Promise<AuthResponse> => {
   const response = await fetch(`${BASE_URL}/register`, {
     method: "POST",
     headers: {
@@ -18,7 +19,7 @@ export const registerUser = async (userData) => {
   return data;
 };
 
-export const loginUser = async (credentials) => {
+export const loginUser = async (credentials: LoginData): Promise<AuthResponse> => {
   const response = await fetch(`${BASE_URL}/login`, {
     method: "POST",
     headers: {
