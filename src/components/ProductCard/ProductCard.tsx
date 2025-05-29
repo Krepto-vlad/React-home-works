@@ -1,8 +1,17 @@
 import { useState } from "react";
 import "./ProductCard.scss";
 import { Button } from "../Button/index";
+import { type Product } from "../../../types/productTypes";
 
-export default function ProductCard({ product, updateCartCount }) {
+interface ProductCardProps {
+  product: Product;
+  updateCartCount: (args: { id: number; count: number }) => void;
+}
+
+export default function ProductCard({
+  product,
+  updateCartCount,
+}: ProductCardProps) {
   const [count, setCount] = useState(0);
 
   const handleIncrementProduct = () => {
@@ -19,10 +28,11 @@ export default function ProductCard({ product, updateCartCount }) {
     setCount(0);
   };
 
-  const truncateText = (text, maxLength = 80) => {
+  const truncateText = (text: string | undefined, maxLength = 80): string => {
     if (!text) return "";
     return text.length > maxLength ? text.slice(0, maxLength) + " ..." : text;
   };
+
   return (
     <li className="product_card">
       <div className="image_wrapper">

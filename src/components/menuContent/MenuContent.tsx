@@ -2,6 +2,17 @@ import "./menuContent.scss";
 import { Button } from "../Button/index";
 import { ProductCards } from "../ProductCards/index";
 import { Tooltip } from "../tooltip/index";
+import { type Product } from "../../../types/productTypes";
+
+interface MenuContentProps {
+  loading: boolean;
+  error: string | null;
+  updateCartCount: (args: { id: number; count: number }) => void;
+  products: Product[];
+  categories: string[];
+  setActiveCategory: (category: string) => void;
+  activeCategory: string | null;
+}
 
 export default function MenuContent({
   loading,
@@ -11,7 +22,7 @@ export default function MenuContent({
   categories,
   setActiveCategory,
   activeCategory,
-}) {
+}: MenuContentProps) {
   return (
     <div className="menu_wrapper">
       <p className="title">Browse our menu</p>

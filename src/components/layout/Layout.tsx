@@ -1,9 +1,14 @@
+import { ReactNode } from "react";
 import { Header } from "../header/index";
 import { Footer } from "../footer/index";
 import { Cart } from "../cart/index";
 
-export default function Layout({ cart, children }) {
-  
+interface LayoutProps {
+  cart?: Record<string, number>;
+  children: ReactNode;
+}
+
+export default function Layout({ cart= {}, children }: LayoutProps) {
   return (
     <>
       <Header>
