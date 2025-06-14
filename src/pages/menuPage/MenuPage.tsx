@@ -3,12 +3,15 @@ import { Layout } from "../../components/layout/index";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../constants/constants";
 import { useFetch } from "../../Utils/customHooks";
+import { type Product } from "../../../types/productTypes";
+
+type CartItems = Record<string, number>;
 
 export default function MenuPage() {
-  const { data: products, loading, error } = useFetch(API_URL);
-  const [cartItems, setCartItems] = useState({});
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const { data: products, loading, error } = useFetch<Product[]>(API_URL);
+  const [cartItems, setCartItems] = useState<CartItems>({});
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [categories, setCategories] = useState<string[]>([]);
 
   useEffect(() => {
     if (!products || products.length === 0) return;
@@ -18,7 +21,7 @@ export default function MenuPage() {
     setActiveCategory(uniqueCategories[0]);
   }, [products]);
 
-  const updateCartCount = ({ id, count }) => {
+  const updateCartCount = ({ id, count }: { id: number; count: number }): void => {
     setCartItems((prevCart) => {
       const prevCount = prevCart[id] || 0;
       return {

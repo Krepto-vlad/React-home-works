@@ -29,7 +29,11 @@ export default function HomeContent() {
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500.
           </DummyText>
-          <Button buttonText="Place an Order" variant="primary" />
+          <Button
+            buttonText="Place an Order"
+            variant="primary"
+            onClick={() => {}}
+          />
           <TrustpilotImg src={trustpilotImage} alt="trustpilot img" />
           <Reviews>
             <Rate>4.8 out of 5</Rate> based on 2000+ reviews

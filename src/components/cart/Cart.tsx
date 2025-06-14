@@ -1,8 +1,14 @@
 import imageCart from "../../assets/cart.png";
 import "./Cart.scss";
 
-export default function Cart({ cart }) {
-  const totalItems = cart ? Object.values(cart).reduce((total, count) => total + count, 0) : 0;
+interface CartProps {
+  cart: Record<string, number>;
+}
+
+export default function Cart({ cart }: CartProps) {
+  const totalItems = cart
+    ? Object.values(cart).reduce((total, count) => total + count, 0)
+    : 0;
 
   return (
     <div className="cart_button">

@@ -1,7 +1,9 @@
 import "./header.scss";
 import imageLogo from "../../assets/logo.png";
+import { PropsWithChildren } from "react";
 
-export default function Header({ children }) {
+
+export default function Header({ children }: PropsWithChildren<{}>) {
   return (
     <header>
       <a className="logo" href="/">
