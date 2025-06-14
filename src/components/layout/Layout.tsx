@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useAppSelector } from "../../app/hooks";
 import { Header } from "../header/index";
 import { Footer } from "../footer/index";
 import { Cart } from "../cart/index";
@@ -8,7 +9,8 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-export default function Layout({ cart= {}, children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
+  const cart = useAppSelector((state) => state.cart.items);
   return (
     <>
       <Header>

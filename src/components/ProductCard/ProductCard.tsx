@@ -1,30 +1,29 @@
 import { useState } from "react";
 import "./ProductCard.scss";
 import { Button } from "../Button/index";
+import { useAppDispatch } from "../../../src/app/hooks";
+import { addToCart } from "../../features/cart/cartSlice";
 import { type Product } from "../../../types/productTypes";
 
 interface ProductCardProps {
   product: Product;
-  updateCartCount: (args: { id: number; count: number }) => void;
 }
 
-export default function ProductCard({
-  product,
-  updateCartCount,
-}: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [count, setCount] = useState(0);
+  const dispatch = useAppDispatch();
 
   const handleIncrementProduct = () => {
-    setCount((prevCount) => prevCount + 1);
+    setCount((prev) => prev + 1);
   };
 
   const handleDecrementProduct = () => {
-    setCount((prevCount) => Math.max(prevCount - 1, 0));
+    setCount((prev) => Math.max(prev - 1, 0));
   };
 
   const handleAddToCart = () => {
     if (count === 0) return;
-    updateCartCount({ id: product.id, count });
+    dispatch(addToCart({ id: product.id, count }));
     setCount(0);
   };
 

@@ -21,7 +21,7 @@ export default function MenuPage() {
     setActiveCategory(uniqueCategories[0]);
   }, [products]);
 
-  const updateCartCount = ({ id, count }: { id: number; count: number }): void => {
+  const updateCartCount = ({ id, count }: { id: number; count: number }) => {
     setCartItems((prevCart) => {
       const prevCount = prevCart[id] || 0;
       return {
