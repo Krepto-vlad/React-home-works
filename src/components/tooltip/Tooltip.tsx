@@ -1,12 +1,7 @@
 import "./Tooltip.scss";
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
-interface TooltipProps {
-  children: ReactNode;
-  text: string;
-}
-
-export default function Tooltip({ children, text }: TooltipProps) {
+export default function Tooltip({ children, text }: PropsWithChildren<{ text: string }>) {
   return (
     <span className="tooltip" data-text={text}>
       {children}

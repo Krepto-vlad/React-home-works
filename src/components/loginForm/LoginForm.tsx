@@ -35,9 +35,14 @@ const LoginForm = () => {
         localStorage.setItem("token", response.token);
         localStorage.setItem("userId", String(response.user.id));
       }
-    } catch (error: any) {
-      console.log(error.message);
-      setAuthError(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        setAuthError(error.message);
+      } else {
+        console.log("Unexpected error", error);
+        setAuthError("Something went wrong");
+      }
     }
   };
 
