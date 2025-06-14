@@ -1,54 +1,23 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { loginUser, registerUser } from "../../api/authService";
 import "./loginForm.scss";
-
-interface FormData {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-}
-
-const initialForm = {
-  name: "",
-  surname: "",
-  email: "",
-  password: "",
-};
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { setFormField, toggleMode, loginThunk, registerThunk } from "../../features/authorization/authSlice";
+import { FormEvent } from "react";
 
 const LoginForm = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [formData, setFormData] = useState<FormData>(initialForm);
-  const [authError, setAuthError] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const { formData, isLogin, authError } = useAppSelector((state) => state.auth);
 
-  const handleInputChange = (field: keyof FormData, value: string): void => {
-    setAuthError("");
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleAuth = async (isLogin: boolean): Promise<void> => {
-    try {
-      const response = isLogin
-        ? await loginUser(formData)
-        : await registerUser(formData);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        localStorage.setItem("userId", String(response.user.id));
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-        setAuthError(error.message);
-      } else {
-        console.log("Unexpected error", error);
-        setAuthError("Something went wrong");
-      }
-    }
+  const handleInputChange = (field: keyof typeof formData, value: string): void => {
+    dispatch(setFormField({ field, value }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    handleAuth(isLogin);
+    if (isLogin) {
+      dispatch(loginThunk(formData));
+    } else {
+      dispatch(registerThunk(formData));
+    }
   };
 
   return (
@@ -114,14 +83,14 @@ const LoginForm = () => {
             {isLogin ? (
               <>
                 <p className="create-acc">Don't have an account?</p>
-                <button type="button" onClick={() => setIsLogin(false)}>
+                <button type="button" onClick={() => dispatch(toggleMode())}>
                   Create a free account
                 </button>
               </>
             ) : (
               <>
                 <p className="create-acc">Already have an account?</p>
-                <button type="button" onClick={() => setIsLogin(true)}>
+                <button type="button" onClick={() => dispatch(toggleMode())}>
                   Log in
                 </button>
               </>
@@ -134,3 +103,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

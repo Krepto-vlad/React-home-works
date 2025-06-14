@@ -1,13 +1,13 @@
 import "./menuContent.scss";
-import { Button } from "../Button/index";
+import { Button } from "../Button";
 import { ProductCards } from "../ProductCards/index";
-import { Tooltip } from "../tooltip/index";
+import { Tooltip } from "../tooltip";
 import { type Product } from "../../../types/productTypes";
 
 interface MenuContentProps {
   loading: boolean;
-  error: string | null;
   updateCartCount: (args: { id: number; count: number }) => void;
+  error: string | null;
   products: Product[];
   categories: string[];
   setActiveCategory: (category: string) => void;
@@ -17,7 +17,6 @@ interface MenuContentProps {
 export default function MenuContent({
   loading,
   error,
-  updateCartCount,
   products,
   categories,
   setActiveCategory,
@@ -49,7 +48,6 @@ export default function MenuContent({
         error={error}
         products={products}
         activeCategory={activeCategory}
-        updateCartCount={updateCartCount}
       />
     </div>
   );

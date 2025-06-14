@@ -6,9 +6,7 @@ interface CartProps {
 }
 
 export default function Cart({ cart }: CartProps) {
-  const totalItems = cart
-    ? Object.values(cart).reduce((total, count) => total + count, 0)
-    : 0;
+  const totalItems = Object.values(cart || {}).reduce((acc, val) => acc + val, 0);
 
   return (
     <div className="cart_button">
