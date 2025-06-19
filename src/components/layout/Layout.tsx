@@ -1,14 +1,13 @@
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
+import { useAppSelector } from "../../app/hooks";
 import { Header } from "../header/index";
 import { Footer } from "../footer/index";
 import { Cart } from "../cart/index";
 
-interface LayoutProps {
-  cart?: Record<string, number>;
-  children: ReactNode;
-}
 
-export default function Layout({ cart= {}, children }: LayoutProps) {
+
+export default function Layout({ children }: PropsWithChildren<{}>) {
+  const cart = useAppSelector((state) => state.cart.items);
   return (
     <>
       <Header>

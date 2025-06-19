@@ -8,7 +8,6 @@ import { type Product } from "../../../types/productTypes";
 interface ProductCardsProps {
   products: Product[];
   activeCategory: string | null;
-  updateCartCount: (args: { id: number; count: number }) => void;
   loading: boolean;
   error: string | null;
 }
@@ -16,7 +15,6 @@ interface ProductCardsProps {
 export default function ProductCards({
   products,
   activeCategory,
-  updateCartCount,
   loading,
   error,
 }: ProductCardsProps) {
@@ -44,11 +42,7 @@ export default function ProductCards({
     <div className="product_cards">
       <ul className="product_card_wrapper">
         {visibleProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            updateCartCount={updateCartCount}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </ul>
 
