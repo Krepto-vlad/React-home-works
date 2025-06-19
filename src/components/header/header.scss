@@ -2,6 +2,10 @@ header {
     display: flex;
     padding: 20px 120px;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 1000;
 
     .navigation_wrapper {
         display: flex;
@@ -18,11 +22,37 @@ header {
                 list-style-type: none;
                 font-family: "Inter", sans-serif;
         
-            }
-        
-            li:hover {
+                li a {
+                    text-decoration: none;
+                    color: #28224B;
+                    transition: color 0.2s ease-in;
+                }
+
+                li button {
+                    border: none;
+                    background-color: #ffffff;
+                    text-decoration: none;
+                    color: #28224B;
+                    transition: color 0.2s ease-in;
+                    font-size: 16px;
+                }
+                
+                li button:hover {
                 color: #35B8BE;
-            }  
+                }  
+                
+                li button.active  {
+                    color: #35B8BE;
+                }  
+
+                li a:hover {
+                color: #35B8BE;
+                }  
+                li a.active  {
+                    color: #35B8BE;
+                }  
+            }
+            
         }
     }
 }
