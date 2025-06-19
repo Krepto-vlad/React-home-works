@@ -1,24 +1,39 @@
 import "./loginForm.scss";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { setFormField, toggleMode, loginThunk, registerThunk } from "../../features/authorization/authSlice";
+import {
+  setFormField,
+  toggleMode,
+  loginThunk,
+  registerThunk,
+} from "../../features/authorization/authSlice";
 import { FormEvent } from "react";
+import {
+  selectAuthFormData,
+  selectIsLogin,
+  selectAuthError,
+} from "../../features/authorization/selectors";
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
-  const { formData, isLogin, authError } = useAppSelector((state) => state.auth);
+  const formData = useAppSelector(selectAuthFormData);
+  const isLogin = useAppSelector(selectIsLogin);
+  const authError = useAppSelector(selectAuthError);
 
-  const handleInputChange = (field: keyof typeof formData, value: string): void => {
+  const action = isLogin ? loginThunk : registerThunk;
+
+  const handleInputChange = (
+    field: keyof typeof formData,
+    value: string
+  ): void => {
     dispatch(setFormField({ field, value }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (isLogin) {
-      dispatch(loginThunk(formData));
-    } else {
-      dispatch(registerThunk(formData));
-    }
+    dispatch(action(formData));
   };
+
+  const handleToggleMode = () => dispatch(toggleMode());
 
   return (
     <div className="loginWrapper">
@@ -83,14 +98,14 @@ const LoginForm = () => {
             {isLogin ? (
               <>
                 <p className="create-acc">Don't have an account?</p>
-                <button type="button" onClick={() => dispatch(toggleMode())}>
+                <button type="button" onClick={handleToggleMode}>
                   Create a free account
                 </button>
               </>
             ) : (
               <>
                 <p className="create-acc">Already have an account?</p>
-                <button type="button" onClick={() => dispatch(toggleMode())}>
+                <button type="button" onClick={handleToggleMode}>
                   Log in
                 </button>
               </>
@@ -103,4 +118,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-

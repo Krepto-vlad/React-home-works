@@ -1,7 +1,13 @@
 import { footerInfo } from "../../constants/constants";
+import { NavLink } from "react-router-dom";
 import "./footerLinks.scss";
 
 export default function FooterLinks() {
+  const routes = {
+    Home: "/",
+    Order: "/order",
+  };
+
   return (
     <div className="footer_info">
       {footerInfo.map((column) => {
@@ -11,22 +17,23 @@ export default function FooterLinks() {
           <div key={column.columnName} className="footer_column">
             <p className="column_name">{column.columnName}</p>
 
-            {column.components.map((item, index) =>
-              isTemplate ? (
-                <a
+            {column.components.map((item, index) => {
+              const path = routes[item as keyof typeof routes];
+
+              return path ? (
+                <NavLink key={index} to={path} className="template_text">
+                  {item}
+                </NavLink>
+              ) : (
+                <NavLink
                   key={index}
-                  href="https://www.google.com"
+                  to={`/${item.toLowerCase()}`}
                   className="template_text"
-                  target="_blank"
                 >
                   {item}
-                </a>
-              ) : (
-                <p key={index} className="template_text">
-                  {item}
-                </p>
-              )
-            )}
+                </NavLink>
+              );
+            })}
           </div>
         );
       })}
