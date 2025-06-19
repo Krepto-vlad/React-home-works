@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
   isActive?: boolean;
   variant?: "primary" | "filter";
+  disabled?: boolean;
 }
 
 export default function Button({
