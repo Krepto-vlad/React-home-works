@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { RegisterData, LoginData, AuthResponse } from "../../../types/authTypes";
+import {
+  RegisterData,
+  LoginData,
+  AuthResponse,
+} from "../../../types/authTypes";
 import { registerUser, loginUser } from "../../api/authService";
 
 interface AuthState {
@@ -49,13 +53,29 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setFormField(state, action: PayloadAction<{ field: keyof RegisterData; value: string }>) {
+    setFormField(
+      state,
+      action: PayloadAction<{ field: keyof RegisterData; value: string }>
+    ) {
       state.authError = "";
       state.formData[action.payload.field] = action.payload.value;
     },
     toggleMode(state) {
       state.isLogin = !state.isLogin;
       state.authError = "";
+    },
+    logout(state) {
+      state.token = null;
+      state.userId = null;
+      state.authError = "";
+      state.formData = {
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+      };
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
     },
   },
   extraReducers: (builder) => {
@@ -81,5 +101,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setFormField, toggleMode } = authSlice.actions;
+export const { setFormField, toggleMode, logout } = authSlice.actions;
 export default authSlice.reducer;
