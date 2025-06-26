@@ -30,3 +30,17 @@
 
     }
 }
+
+
+
+[data-theme="dark"] { 
+    .footer_info {
+        .column_name{
+            color: #ffffff;
+        }
+
+        .template_text{
+            color: #b8b5b5;
+        }
+    }
+}
