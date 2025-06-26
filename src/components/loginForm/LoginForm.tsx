@@ -49,6 +49,7 @@ const LoginForm = () => {
                   value={formData.name}
                   onChange={(e) => handleInputChange("name", e.target.value)}
                   required
+                  placeholder="Your name.."
                 />
               </label>
               <label>
@@ -58,6 +59,7 @@ const LoginForm = () => {
                   value={formData.surname}
                   onChange={(e) => handleInputChange("surname", e.target.value)}
                   required
+                  placeholder="Your last name.."
                 />
               </label>
             </>
@@ -75,6 +77,7 @@ const LoginForm = () => {
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
               required
+              placeholder="Your email.."
             />
           </label>
 
@@ -85,6 +88,7 @@ const LoginForm = () => {
               value={formData.password}
               onChange={(e) => handleInputChange("password", e.target.value)}
               required
+              placeholder="Your password.."
             />
           </label>
 

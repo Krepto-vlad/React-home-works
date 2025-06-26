@@ -5,11 +5,14 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { logout, toggleMode } from "../../features/authorization/authSlice";
 import { selectIsAuthenticated } from "../../features/authorization/selectors";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTheme } from "../Theme/ThemeContext";
+import ThemeSwitcher from "../../assets/dark.svg?react"
 
 export default function Header({ children }: PropsWithChildren<{}>) {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -29,6 +32,13 @@ export default function Header({ children }: PropsWithChildren<{}>) {
       <div className="navigation_wrapper">
         <nav>
           <ul>
+            <li>
+              <button onClick={toggleTheme}>
+                <ThemeSwitcher className="theme_switcher">
+                  {theme === "light" ? "Dark" : "Light"}
+                </ThemeSwitcher>    
+              </button>
+            </li>
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
