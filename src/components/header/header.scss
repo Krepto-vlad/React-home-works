@@ -1,10 +1,13 @@
+$light-color:#ffffff;
+$dark-color-background:#2D2D30;
+
 header {
     display: flex;
     padding: 20px 120px;
     justify-content: space-between;
     position: sticky;
     top: 0;
-    background: #ffffff;
+    background: $light-color;
     z-index: 1000;
 
     .navigation_wrapper {
@@ -21,6 +24,7 @@ header {
                 gap: 32px;
                 list-style-type: none;
                 font-family: "Inter", sans-serif;
+                align-items: center;
         
                 li a {
                     text-decoration: none;
@@ -29,12 +33,19 @@ header {
                 }
 
                 li button {
+                    display: flex;
                     border: none;
-                    background-color: #ffffff;
+                    background-color: $light-color;
                     text-decoration: none;
                     color: #28224B;
                     transition: color 0.2s ease-in;
                     font-size: 16px;
+                    align-items: center;
+
+                    .theme_switcher{
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
                 
                 li button:hover {
@@ -55,4 +66,21 @@ header {
             
         }
     }
+}
+
+
+
+[data-theme="dark"] {
+  header {
+    background: $dark-color-background;
+  }
+
+  .navigation_wrapper {
+    nav ul {
+        li a, li button{
+            color: $light-color;
+            background-color: #2D2D30;
+        }
+    }
+  }
 }

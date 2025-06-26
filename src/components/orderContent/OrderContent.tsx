@@ -13,7 +13,7 @@ import { selectCartItems } from "../../features/cart/selectors";
 import { selectProductsList } from "../../features/products/selectors";
 import "./orderContent.scss";
 import { Button } from "../Button";
-import imageSmile from "../../assets/smile.png";
+import ImageSmile from "../../assets/smile.svg?react";
 
 export default function OrderContent() {
   const dispatch = useAppDispatch();
@@ -61,7 +61,7 @@ export default function OrderContent() {
     return (
       <div className="order_content">
         <div className="order_empty">
-          <img src={imageSmile} alt="sad smile" />
+          <ImageSmile className="sad_smile"/>
           <div className="empty_cart_wrapper">
             <p className="empty_title"> Your cart is empty! </p>
             <Button
