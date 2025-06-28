@@ -1,22 +1,23 @@
 import "./footer.scss";
 import { FooterLinks } from "../footerLinks";
+import { NavLink } from "react-router-dom";
 
 import imageLogo from "../../assets/logo.png";
-import inst from "../../assets/inst.png";
-import YT from "../../assets/YT.png";
-import twitter from "../../assets/twit.png";
-import backImg from "../../assets/24.png";
+import Inst from "../../assets/inst.svg?react";
+import Twitter from "../../assets/twit.svg?react";
+import YT  from "../../assets/YT.svg?react";
+import BackImg from "../../assets/24.svg?react";
 
 export default function Footer() {
   return (
     <div className="footer">
-      <img className="back_img" src={backImg} alt="backImg" />
+      <BackImg className="back_img" />
 
       <div className="footer_nav">
         <div className="about_wrapper">
-          <a className="logo" href="/">
+          <NavLink className="logo" to="/">
             <img src={imageLogo} alt="logo" />
-          </a>
+          </NavLink>
           <p className="footer_nav_subtext">
             Takeaway & Delivery template for small - medium businesses.
           </p>
@@ -34,9 +35,9 @@ export default function Footer() {
         </p>
 
         <div className="social_networks">
-          <img src={inst} alt="inst" />
-          <img src={twitter} alt="twitter" />
-          <img src={YT} alt="YT" />
+          <Inst className="social_icon" />
+          <Twitter className="social_icon" />
+          <YT className="social_icon" />
         </div>
       </div>
     </div>
