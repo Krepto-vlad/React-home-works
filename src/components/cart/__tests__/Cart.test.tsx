@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Cart from "./Cart";
+import Cart from "../Cart";
 import { BrowserRouter } from "react-router-dom";
 
 const renderCart = (cart = {}) =>

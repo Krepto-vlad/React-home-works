@@ -2,7 +2,7 @@ import reducer, {
   addToCart,
   removeFromCart,
   clearCart,
-} from "./cartSlice";
+} from "../cartSlice";
 
 beforeEach(() => {
   sessionStorage.clear();
@@ -38,7 +38,7 @@ describe("cartSlice", () => {
     const mockCart = { 7: 1, 8: 3 };
     sessionStorage.setItem("cart", JSON.stringify(mockCart));
 
-    const cartReducer = require("./cartSlice").default;
+    const cartReducer = require("../cartSlice").default;
 
     const state = cartReducer(undefined, { type: "init" });
     expect(state.items).toEqual(mockCart);
