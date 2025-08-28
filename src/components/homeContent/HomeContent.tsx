@@ -1,7 +1,7 @@
 import "./homeContent.scss";
 import homeImage from "../../assets/homeImg.png";
 import trustpilotImage from "../../assets/trustpilot.png";
-import { Button } from "../Button/index";
+import { Link } from "react-router-dom";
 
 export default function HomeContent() {
   return (
@@ -17,11 +17,7 @@ export default function HomeContent() {
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500.
           </p>
-          <Button
-            buttonText="Place an Order"
-            variant="primary"
-            onClick={() => {}}
-          />
+          <Link to="/order" className="button primary">Place an order</Link>
           <img
             className="trustpilot-img"
             src={trustpilotImage}

@@ -6,20 +6,35 @@ import {
   loginThunk,
   registerThunk,
 } from "../../features/authorization/authSlice";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import {
   selectAuthFormData,
   selectIsLogin,
   selectAuthError,
 } from "../../features/authorization/selectors";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const dispatch = useAppDispatch();
   const formData = useAppSelector(selectAuthFormData);
   const isLogin = useAppSelector(selectIsLogin);
   const authError = useAppSelector(selectAuthError);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const action = isLogin ? loginThunk : registerThunk;
+
+  const navigate = useNavigate();
+
+  const isPasswordValid = (password: string): boolean => {
+    const minLength = /.{8,}/;
+    const hasUpperCase = /[A-Z]/;
+    const hasNumber = /[0-9]/;
+    return (
+      minLength.test(password) &&
+      hasUpperCase.test(password) &&
+      hasNumber.test(password)
+    );
+  };
 
   const handleInputChange = (
     field: keyof typeof formData,
@@ -28,9 +43,26 @@ const LoginForm = () => {
     dispatch(setFormField({ field, value }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    dispatch(action(formData));
+
+    if (!isPasswordValid(formData.password)) {
+      setPasswordError(
+        "Password must be at least 8 characters long, contain a capital letter and a number"
+      );
+      return;
+    }
+
+    setPasswordError(null);
+
+    const resultAction = await dispatch(action(formData));
+
+    if (
+      loginThunk.fulfilled.match(resultAction) ||
+      registerThunk.fulfilled.match(resultAction)
+    ) {
+      navigate("/");
+    }
   };
 
   const handleToggleMode = () => dispatch(toggleMode());
@@ -91,9 +123,9 @@ const LoginForm = () => {
               placeholder="Your password.."
             />
           </label>
-
-          {authError && <p className="error">{authError}</p>}
-
+          {(passwordError || authError) && (
+            <p className="error">{passwordError || authError}</p>
+          )}
           <button type="submit" className="login-btn">
             {isLogin ? "Login" : "Create account"}
           </button>

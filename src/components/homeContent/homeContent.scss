@@ -26,8 +26,30 @@
     max-width: 600px;
     max-height: 500px;
 
-    button {
-      max-width: 190px;
+    a.button {
+    display: inline-block;
+    text-decoration: none;
+    min-width: 147px;
+    max-width: 150px;
+    padding: 16px 36px;
+    font-family: "Inter", sans-serif;
+    font-size: 17px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    }
+
+    a.button.primary {
+    background-color: #35b8be;
+    color: white;
+    }
+
+    a.button.primary:hover {
+    box-shadow: 3px 3px 10px 1px rgba(101, 119, 117, 0.3);
+    transform: translateY(-3px);
     }
 
     .title {
@@ -82,19 +104,19 @@
 
 [data-theme="dark"] {
     .home-wrapper {
-        background: #2D2D30;
-        z-index: -1;
-
+        background: #1a1a1a;
+        opacity: 0.9;
+        
+        &::after {
+            background: #0a0a0a;
+        }
+        
         .title, .reviews {
             color: #ffffff;
         }
 
         .dummy-text {
             color: #b8b5b5;
-        }
-
-        &::after {
-            background: #232323;
         }
     }
 }

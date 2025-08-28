@@ -6,7 +6,7 @@ import {
 } from "../../features/cart/cartSlice";
 import { useState } from "react";
 import { setProducts } from "../../features/products/productsSlice";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFetch } from "../../Utils/customHooks";
 import { API_URL } from "../../constants/constants";
 import { selectCartItems } from "../../features/cart/selectors";
@@ -17,7 +17,6 @@ import ImageSmile from "../../assets/smile.svg?react";
 
 export default function OrderContent() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const cart = useAppSelector(selectCartItems);
   const products = useAppSelector(selectProductsList);
 
@@ -64,11 +63,7 @@ export default function OrderContent() {
           <ImageSmile className="sad_smile"/>
           <div className="empty_cart_wrapper">
             <p className="empty_title"> Your cart is empty! </p>
-            <Button
-              buttonText="Go to Menu"
-              onClick={() => navigate("/menu")}
-              variant="primary"
-            />
+            <Link to="/menu" className="button primary">Go to menu</Link>
           </div>
         </div>
       </div>

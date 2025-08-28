@@ -48,7 +48,7 @@ export default function MenuPage() {
   };
 
   return (
-    <Layout cart={cartItems}>
+    <Layout>
       <MenuContent
         updateCartCount={updateCartCount}
         categories={categories}

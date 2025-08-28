@@ -1,6 +1,6 @@
 import "./footer.scss";
 import { FooterLinks } from "../footerLinks";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import imageLogo from "../../assets/logo.png";
 import Inst from "../../assets/inst.svg?react";
@@ -15,9 +15,9 @@ export default function Footer() {
 
       <div className="footer_nav">
         <div className="about_wrapper">
-          <NavLink className="logo" to="/">
+          <Link className="logo" to="/">
             <img src={imageLogo} alt="logo" />
-          </NavLink>
+          </Link>
           <p className="footer_nav_subtext">
             Takeaway & Delivery template for small - medium businesses.
           </p>

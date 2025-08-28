@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/Button/index";
 import "./NotFoundPage.scss";
 import ImageSmile from "../../assets/smile.svg?react";
+import { Link } from "react-router-dom";
 
 export default function NotFoundPage() {
-  const navigate = useNavigate();
   return (
     <div className="not_found_wrapper">
       <div className="icon_wrapper">
@@ -16,11 +14,7 @@ export default function NotFoundPage() {
       <p className="not_found_message">
         Sorry, the page you’re looking for doesn’t exist.
       </p>
-      <Button
-        buttonText="Go to Home"
-        onClick={() => navigate("/")}
-        variant="primary"
-      />
+      <Link to="/" className="button primary">Go to home</Link>
     </div>
   );
 }

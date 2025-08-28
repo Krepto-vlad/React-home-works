@@ -5,7 +5,7 @@ import { Footer } from "../footer/index";
 import { Cart } from "../cart/index";
 import { selectCartItems } from "../../features/cart/selectors";
 
-export default function Layout({ children }: PropsWithChildren<{}>) {
+export default function Layout({ children }: PropsWithChildren) {
   const cart = useAppSelector(selectCartItems);
   return (
     <>
