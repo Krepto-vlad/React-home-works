@@ -189,11 +189,50 @@
       font-size: 18px;
       line-height: 20px;
       letter-spacing: 0.6px;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    .order_summary {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px 20px;
+      background-color: #f0f9fa;
+      border-radius: 6px;
+      border: 1px solid #35b8be26;
+
+      .total_amount {
+        font-size: 24px;
+        font-weight: 600;
+        color: #35b8be;
+        text-align: center;
+        margin: 0;
+      }
     }
 
     button {
       margin-top: 30px;
-      width: 147px;
+      width: 200px;
+    }
+
+    .processing_message {
+      margin-top: 10px;
+      color: #35b8be;
+      font-size: 14px;
+      text-align: center;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
     }
   }
 }
@@ -243,6 +282,19 @@
       background-color: #3e3e42;
       border: 1px solid #7e7c7c;
       color: #ffffff;
+    }
+
+    .order_summary {
+      background-color: #3e3e42;
+      border-color: #7e7c7c;
+
+      .total_amount {
+        color: #35b8be;
+      }
+    }
+
+    .processing_message {
+      color: #35b8be;
     }
   }
 }

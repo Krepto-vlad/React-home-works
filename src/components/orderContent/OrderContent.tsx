@@ -11,36 +11,86 @@ import { useFetch } from "../../Utils/customHooks";
 import { API_URL } from "../../constants/constants";
 import { selectCartItems } from "../../features/cart/selectors";
 import { selectProductsList } from "../../features/products/selectors";
+import { selectUserId } from "../../features/authorization/selectors";
 import "./orderContent.scss";
 import { Button } from "../Button";
 import ImageSmile from "../../assets/smile.svg?react";
+import { getPaymentProcessor } from "../../services/payment";
+import type { OrderData } from "../../services/payment";
 
 export default function OrderContent() {
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartItems);
   const products = useAppSelector(selectProductsList);
+  const userId = useAppSelector(selectUserId);
 
   useFetch(API_URL, setProducts, true, products.length === 0 ? null : products);
 
   const [street, setStreet] = useState("");
   const [house, setHouse] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const productEntries = Object.entries(cart);
   const isCartEmpty = productEntries.length === 0;
   const isFormValid = street.trim() !== "" && house.trim() !== "";
 
+  const totalAmount = productEntries.reduce((total, [idStr, count]) => {
+    const product = products.find((p) => String(p.id) === idStr);
+    return total + (product ? product.price * count : 0);
+  }, 0);
+
   const handleDeleteItem = (id: number) => dispatch(removeFromCart(id));
 
-  const handleOrder = () => {
-    if (street.trim() && house.trim()) {
-      dispatch(clearCart());
-      setStreet("");
-      setHouse("");
-      setSubmitted(false);
-      alert("Order placed!");
-    } else {
+  const handleOrder = async () => {
+    if (!street.trim() || !house.trim()) {
       setSubmitted(true);
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      const orderData: OrderData = {
+        amount: totalAmount,
+        currency: 'usd',
+        orderId: `ORDER-${Date.now()}`,
+      };
+
+      console.log('🛒 Processing payment for order:', orderData);
+
+      const paymentProcessor = getPaymentProcessor();
+
+      const paymentResult = await paymentProcessor.processPayment(orderData);
+
+      if (paymentResult.success) {
+        alert(
+          `✅ Payment successful!\n\n` +
+          `Transaction ID: ${paymentResult.transactionId}\n` +
+          `Amount: $${totalAmount}\n` +
+          `Order ID: ${orderData.orderId}\n\n` +
+          `Your order will be delivered to:\n${street}, ${house}`
+        );
+
+        dispatch(clearCart());
+        setStreet("");
+        setHouse("");
+        setSubmitted(false);
+      } else {
+        alert(
+          `❌ Payment failed!\n\n` +
+          `${paymentResult.message}\n\n` +
+          `Please try again or contact support.`
+        );
+      }
+    } catch (error) {
+      console.error('Order processing error:', error);
+      alert(
+        `❌ An error occurred while processing your order.\n\n` +
+        `${(error as Error).message}`
+      );
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -123,6 +173,7 @@ export default function OrderContent() {
           value={street}
           onChange={(e) => setStreet(e.target.value)}
           className={submitted && !street.trim() ? "invalid_input" : ""}
+          disabled={isProcessing}
         />
         <input
           type="text"
@@ -130,15 +181,22 @@ export default function OrderContent() {
           value={house}
           onChange={(e) => setHouse(e.target.value)}
           className={submitted && !house.trim() ? "invalid_input" : ""}
+          disabled={isProcessing}
         />
+        <div className="order_summary">
+          <p className="total_amount">Total: ${totalAmount.toFixed(2)}</p>
+        </div>
         <Button
-          buttonText="Order"
+          buttonText={isProcessing ? "Processing..." : "Pay & Order"}
           onClick={handleOrder}
-          disabled={!isFormValid}
+          disabled={!isFormValid || isProcessing}
           variant="primary"
         />
         {submitted && !isFormValid && (
           <p className="validation_message">Please fill in both fields</p>
+        )}
+        {isProcessing && (
+          <p className="processing_message">Processing payment... Please wait.</p>
         )}
       </div>
     </div>
